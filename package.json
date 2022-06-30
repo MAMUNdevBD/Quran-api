@@ -5,8 +5,15 @@
   "main": "app.js",
   "author": "MAMUNdevBD",
   "license": "MIT",
+  "scripts": {
+    "mrs": "npx knex migrate:rollback && npx knex migrate:latest && npx knex seed:run"
+  },
   "dependencies": {
     "axios": "^0.27.2",
-    "express": "^4.18.1"
-  }
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "knex": "^2.1.0",
+    "mysql2": "^2.3.3"
+  },
+  "devDependencies": {}
 }

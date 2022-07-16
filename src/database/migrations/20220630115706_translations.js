@@ -1,4 +1,4 @@
-const tb_name = "chapter_translations";
+const tb_name = "translations";
 
 /**
  * @param { import("knex").Knex } knex
@@ -7,23 +7,10 @@ const tb_name = "chapter_translations";
 exports.up = function (knex) {
   return knex.schema.createTable(tb_name, (table) => {
     table.bigIncrements("id").unique().primary();
-    table
-      .bigInteger("chapter_id")
-      .unsigned()
-      .index()
-      .references("id")
-      .inTable("chapters")
-      .onDelete("CASCADE")
-      .notNullable();
-    table
-      .bigInteger("lang_id")
-      .unsigned()
-      .index()
-      .references("id")
-      .inTable("languages")
-      .onDelete("SET NULL");
-    table.string("lang_code");
+    table.enum("parent", ["language", "chapter", "verse"]);
+    table.bigInteger("parent_id");
     table.string("name");
+    table.string("lang_code");
   });
 };
 

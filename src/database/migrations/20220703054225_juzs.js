@@ -1,4 +1,4 @@
-const tb_name = "chapters";
+const tb_name = "juzs";
 
 /**
  * @param { import("knex").Knex } knex
@@ -7,14 +7,11 @@ const tb_name = "chapters";
 exports.up = function (knex) {
   return knex.schema.createTable(tb_name, (table) => {
     table.bigIncrements("id").unique().primary();
-    table.string("revelation_place");
-    table.integer("revelation_order");
-    table.boolean("bismillah_pre");
-    table.string("name_complex");
-    table.string("name_arabic");
+    table.integer("juz_number");
+    table.json("verse_mapping");
+    table.integer("first_verse_id");
+    table.integer("last_verse_id");
     table.integer("verses_count");
-    table.integer("start_page");
-    table.integer("end_page");
   });
 };
 

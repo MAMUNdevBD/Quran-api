@@ -54,22 +54,28 @@ exports.verseByPage = async function (req, res) {
 exports.verseByChapter = async function (req, res) {
   const q = req.query;
   const [words, page, per_page] = [q.words, q.page, q.per_page];
+
   const versesQ = await axios.get(
-    "https://api.quran.com/api/v4/verses/by_chapter/" +
-      req.params.chapterId +
-      "?language=en&words=" +
-      words +
-      "&page=" +
-      page +
-      "&per_page=" +
-      per_page
+    "http://api.quran.com/api/v3/chapters/2/verses?recitation=3&translations=21&language=en&text_type=words"
   );
+
+  // const versesQ = await axios.get(
+  //   "https://api.quran.com/api/v4/verses/by_chapter/" +
+  //     req.params.chapterId +
+  //     "?language=en&words=" +
+  //     words +
+  //     "&page=" +
+  //     page +
+  //     "&per_page=" +
+  //     per_page
+  // );
 
   const data = versesQ.data;
 
   data.verses.map((verse) => {
+    verse.audio.url = process.env.APP_URL + "v1/audio/" + verse.audio.url;
     verse.words.map((word) => {
-      word.audio_url = process.env.APP_URL + "v1/" + word.audio_url;
+      word.audio_url = process.env.APP_URL + "v1/" + word.audio.url;
     });
   });
 

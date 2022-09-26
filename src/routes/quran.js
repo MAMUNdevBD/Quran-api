@@ -13,6 +13,7 @@ const {
   getAudioFIle,
   getAudioByChapter,
   getVersesAudioByChapter,
+  getAudioByVerse,
 } = require("../controller/AudioController");
 const {
   recitationList,
@@ -40,7 +41,8 @@ module.exports = function (route) {
   // Audio
   route.get("/wbw/:fileName", getAudioFIle);
   route.get("/qdc/:p1/:p2/:fileName", getAudioByChapter);
-  route.get("/audio/verse/:p1/:p2/mp3/:fileName", getVersesAudioByChapter);
+  route.get("/audio/:p1/:p2/mp3/:fileName", getVersesAudioByChapter);
+  route.get("/audio/:p1/mp3/:fileName", getAudioByVerse);
 
   route.get("/juzs", juzzList);
 };

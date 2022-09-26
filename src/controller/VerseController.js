@@ -53,10 +53,19 @@ exports.verseByPage = async function (req, res) {
 
 exports.verseByChapter = async function (req, res) {
   const q = req.query;
-  const [words, page, per_page] = [q.words, q.page, q.per_page];
+  const [page, per_page, recitation, translations] = [
+    q.page,
+    q.per_page,
+    q.recitation,
+    q.translations,
+  ];
 
   const versesQ = await axios.get(
-    "http://api.quran.com/api/v3/chapters/2/verses?recitation=3&translations=21&language=en&text_type=words"
+    "http://api.quran.com/api/v3/chapters/2/verses?recitation=" +
+      recitation +
+      "&translations=" +
+      translations +
+      "&language=en&text_type=words"
   );
 
   // const versesQ = await axios.get(

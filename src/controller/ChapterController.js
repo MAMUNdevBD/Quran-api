@@ -2,15 +2,20 @@ const { default: axios } = require("axios");
 const db = require("../database");
 
 exports.chapterList = async function (req, res) {
-  const chapters = await db("chapters");
-  chapters.forEach((chp) => {
-    chp.pages = [chp.start_page, chp.end_page];
-    delete chp.start_page;
-    delete chp.end_page;
-  });
-  res.send({
-    chapters: chapters,
-  });
+  // const chapters = await db("chapters");
+  // chapters.forEach((chp) => {
+  //   chp.pages = [chp.start_page, chp.end_page];
+  //   delete chp.start_page;
+  //   delete chp.end_page;
+  // });
+  // res.send({
+  //   chapters: chapters,
+  // });
+
+  const chapters = await axios.get(
+    "https://api.quran.com/api/v4/chapters?language=en"
+  );
+  res.send(chapters.data);
 };
 
 exports.singleChapter = async function (req, res) {

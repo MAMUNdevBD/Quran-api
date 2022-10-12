@@ -61,7 +61,9 @@ exports.verseByChapter = async function (req, res) {
   ];
 
   const versesQ = await axios.get(
-    "http://api.quran.com/api/v3/chapters/2/verses?recitation=" +
+    "http://api.quran.com/api/v3/chapters/" +
+      req.params.chapterId +
+      "/verses?recitation=" +
       recitation +
       "&translations=" +
       translations +

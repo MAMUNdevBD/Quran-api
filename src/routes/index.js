@@ -5,6 +5,7 @@ const router = express.Router();
 
 module.exports = function (app) {
   require("./quran.js")(router);
+  require("./course.js")(router);
   router.get("/populate-db", populateDB);
   router.get("/grab-data", grabData);
   app.use("/v1", router);
